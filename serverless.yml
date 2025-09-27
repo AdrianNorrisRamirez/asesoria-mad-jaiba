@@ -1,0 +1,36 @@
+service: flask-api-lambda
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: python3.11  # coincide con tu layer
+  region: us-west-1
+  timeout: 10
+
+functions:
+  app:
+    handler: wsgi_handler.handler
+    events:
+      - httpApi: '*'
+    layers:
+      - arn:aws:lambda:us-west-1:749059848665:layer:test-layer:2  # Reemplaza con tu ARN
+
+plugins:
+  - serverless-wsgi
+
+
+custom:
+  wsgi:
+    app: app.app
+    packRequirements: false
+
+
+package:
+  exclude:
+    - node_modules/**
+    - venv/**
+    - __pycache__/**
+    - .venv/**
+    - asesorias_accessKeys.csv
+    - lambda-layer-builder.pem

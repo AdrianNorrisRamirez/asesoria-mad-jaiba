@@ -1,0 +1,7 @@
+.serverless
+node_modules
+.requirements.zip
+asesorias_accessKeys.csv
+lambda-layer-builder.pem
+venv
+package-lock.json
