@@ -1,5 +1,11 @@
 {
   "dependencies": {
     "serverless-wsgi": "^3.1.0"
+  },
+  "scripts": {
+    "dev:local": "sls wsgi serve -p 5000 --stage local",
+    "dev:cloud": "sls wsgi serve -p 5000 --stage cloud",
+    "deploy:dev": "sls deploy --stage dev",
+    "deploy:prod": "sls deploy --stage prod"
   }
 }

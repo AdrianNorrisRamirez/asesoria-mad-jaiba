@@ -6,3 +6,7 @@ lambda-layer-builder.pem
 venv
 package-lock.json
 keys
+__pycache__
+env.cloud.json
+env.local.json
+.vscode

@@ -7,6 +7,18 @@ provider:
   runtime: python3.11  # coincide con tu layer
   region: us-west-1
   timeout: 10
+  
+  # Define la etapa (stage) que se usará para seleccionar el archivo de entorno
+  stage: ${opt:stage, 'local'}
+
+  # Sección para definir las variables de entorno
+  environment:
+    DB_HOST: ${file(./envs/env.${self:provider.stage}.json):DB_HOST}
+    DB_PORT: ${file(./envs/env.${self:provider.stage}.json):DB_PORT}
+    DB_NAME: ${file(./envs/env.${self:provider.stage}.json):DB_NAME}
+    DB_USER: ${file(./envs/env.${self:provider.stage}.json):DB_USER}
+    DB_PASS: ${file(./envs/env.${self:provider.stage}.json):DB_PASS}
+    LOGS: ${file(./envs/env.${self:provider.stage}.json):LOGS, 'prod'} # <--- AÑADE ESTA LÍNEA
 
 functions:
   app:
@@ -22,7 +34,7 @@ plugins:
 
 custom:
   wsgi:
-    app: app.app
+    app: src/app.app
     packRequirements: false
 
 
